@@ -1,0 +1,197 @@
+[
+  {
+    "country": "India",
+    "currency_symbol": "₹",
+    "states": [
+      {
+        "state_name": "West Bengal",
+        "hospitals": [
+          {
+            "name": "Apollo Gleneagles Hospitals",
+            "city": "Kolkata",
+            "type": "Private",
+            "rating": 4.5,
+            "hidden_charge_risk": "High"
+          },
+          {
+            "name": "SSKM Hospital",
+            "city": "Kolkata",
+            "type": "Government",
+            "rating": 4.0,
+            "hidden_charge_risk": "Low"
+          },
+          {
+            "name": "CMRI",
+            "city": "Kolkata",
+            "type": "Private",
+            "rating": 4.2,
+            "hidden_charge_risk": "Medium"
+          },
+          {
+            "name": "Techno India Hospital",
+            "city": "Kolkata",
+            "type": "Private",
+            "rating": 3.9,
+            "hidden_charge_risk": "Medium"
+          },
+          {
+            "name": "RG Kar Medical Hospital",
+            "city": "Kolkata",
+            "type": "Government",
+            "rating": 3.5,
+            "hidden_charge_risk": "High"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 250000,
+            "avg_cost_govt": 125000,
+            "hidden_costs": [
+              { "item": "Implant Markup", "cost": 45000, "note": "Hospitals often charge MRP instead of procurement price." },
+              { "item": "Consumables (Gloves/Masks)", "cost": 12000, "note": "Often billed per-item at inflated rates." },
+              { "item": "Post-Op Physiotherapy", "cost": 8000, "note": "Mandatory internal physio sessions." }
+            ]
+          },
+          {
+            "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 220000,
+            "avg_cost_govt": 95000,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 45000, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 5000, "note": "Often a separate unlisted charge." }
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Bihar",
+        "hospitals": [
+          {
+            "name": "Nageshwar Ortho & Trauma Centre",
+            "city": "Bhagalpur",
+            "type": "Private",
+            "rating": 3.8,
+            "hidden_charge_risk": "High"
+          },
+          {
+            "name": "AIIMS Patna",
+            "city": "Patna",
+            "type": "Government",
+            "rating": 4.6,
+            "hidden_charge_risk": "Low"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 165000,
+            "avg_cost_govt": 110000,
+            "hidden_costs": [
+              { "item": "Medicine Surcharge", "cost": 7000, "note": "Daily fixed charge for meds, regardless of usage." },
+              { "item": "Bed Charges", "cost": 1500, "note": "Daily rent often excluded from surgery packages." }
+            ]
+          },
+          {
+            "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 155000,
+            "avg_cost_govt": 88000,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 40000, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 2000, "note": "Often a separate unlisted charge." }
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Maharashtra",
+        "hospitals": [
+          {
+            "name": "Lilavati Hospital",
+            "city": "Mumbai",
+            "type": "Private",
+            "rating": 4.7,
+            "hidden_charge_risk": "High"
+          },
+          {
+            "name": "KEM Hospital",
+            "city": "Mumbai",
+            "type": "Government",
+            "rating": 4.1,
+            "hidden_charge_risk": "Low"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 220000,
+            "avg_cost_govt": 60000,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 35000, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 5000, "note": "Often a separate unlisted charge." }
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Delhi",
+        "hospitals": [
+          {
+            "name": "Max Super Speciality",
+            "city": "Saket",
+            "type": "Private",
+            "rating": 4.6,
+            "hidden_charge_risk": "High"
+          },
+          {
+            "name": "AIIMS Delhi",
+            "city": "New Delhi",
+            "type": "Government",
+            "rating": 4.9,
+            "hidden_charge_risk": "Low"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 45000,
+            "avg_cost_govt": 2000,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 25000, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 3000, "note": "Mandatory testing package often overpriced." }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "country": "USA",
+    "currency_symbol": "$",
+    "states": [
+      {
+        "state_name": "California",
+        "hospitals": [
+          {
+            "name": "Cedars-Sinai Medical Center",
+            "city": "Los Angeles",
+            "type": "Private",
+            "rating": 4.8,
+            "hidden_charge_risk": "Medium"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 55000,
+            "avg_cost_govt": 15000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
