@@ -61,6 +61,15 @@
               { "item": "Stent Upgrade Upsell", "cost": 45000, "note": "Pushing for 'imported' stents over capped-price ones." },
               { "item": "Cath Lab Sterilization", "cost": 5000, "note": "Often a separate unlisted charge." }
             ]
+          },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 65000,
+            "avg_cost_govt": 39000,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 34000, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 6000, "note": "Mandatory testing package often overpriced." }
+            ]
           }
         ]
       },
@@ -100,6 +109,15 @@
               { "item": "Stent Upgrade Upsell", "cost": 40000, "note": "Pushing for 'imported' stents over capped-price ones." },
               { "item": "Cath Lab Sterilization", "cost": 2000, "note": "Often a separate unlisted charge." }
             ]
+          },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 65000,
+            "avg_cost_govt": 35000,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 33000, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 7000, "note": "Mandatory testing package often overpriced." }
+            ]
           }
         ]
       },
@@ -122,6 +140,16 @@
           }
         ],
         "procedures": [
+            {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 260000,
+            "avg_cost_govt": 115000,
+            "hidden_costs": [
+              { "item": "Implant Markup", "cost": 48000, "note": "Hospitals often charge MRP instead of procurement price." },
+              { "item": "Consumables (Gloves/Masks)", "cost": 10000, "note": "Often billed per-item at inflated rates." },
+              { "item": "Post-Op Physiotherapy", "cost": 9000, "note": "Mandatory internal physio sessions." }
+            ]
+          },
           {
             "name": "Angioplasty (1 Stent)",
             "avg_cost_private": 220000,
@@ -129,6 +157,15 @@
             "hidden_costs": [
               { "item": "Stent Upgrade Upsell", "cost": 35000, "note": "Pushing for 'imported' stents over capped-price ones." },
               { "item": "Cath Lab Sterilization", "cost": 5000, "note": "Often a separate unlisted charge." }
+            ]
+          },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 55000,
+            "avg_cost_govt": 20000,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 35000, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 2000, "note": "Mandatory testing package often overpriced." }
             ]
           }
         ]
@@ -152,10 +189,29 @@
           }
         ],
         "procedures": [
+            {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 300000,
+            "avg_cost_govt": 145000,
+            "hidden_costs": [
+              { "item": "Implant Markup", "cost": 55000, "note": "Hospitals often charge MRP instead of procurement price." },
+              { "item": "Consumables (Gloves/Masks)", "cost": 10000, "note": "Often billed per-item at inflated rates." },
+              { "item": "Post-Op Physiotherapy", "cost": 15000, "note": "Mandatory internal physio sessions." }
+            ]
+          },
+            {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 240000,
+            "avg_cost_govt": 75000,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 65000, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 3000, "note": "Often a separate unlisted charge." }
+            ]
+            },
           {
             "name": "Cataract Surgery",
             "avg_cost_private": 45000,
-            "avg_cost_govt": 2000,
+            "avg_cost_govt": 25000,
             "hidden_costs": [
               { "item": "Lens (IOL) Upgrade", "cost": 25000, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 3000, "note": "Mandatory testing package often overpriced." }
@@ -188,6 +244,24 @@
             "hidden_costs": [
               { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
               { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 24000,
+            "avg_cost_govt": 7500,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 4500,
+            "avg_cost_govt": 2500,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
             ]
           }
         ]
