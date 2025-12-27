@@ -70,6 +70,16 @@
               { "item": "Lens (IOL) Upgrade", "cost": 34000, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 6000, "note": "Mandatory testing package often overpriced." }
             ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 450000,
+            "avg_cost_govt": 350000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 7000, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 12000, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 15000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
           }
         ]
       },
@@ -117,6 +127,16 @@
             "hidden_costs": [
               { "item": "Lens (IOL) Upgrade", "cost": 33000, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 7000, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 550000,
+            "avg_cost_govt": 430000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 4500, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 16000, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 12000, "note": "ICU stay costs often not included in initial cost estimates."}
             ]
           }
         ]
@@ -167,6 +187,16 @@
               { "item": "Lens (IOL) Upgrade", "cost": 35000, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 2000, "note": "Mandatory testing package often overpriced." }
             ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 600000,
+            "avg_cost_govt": 450000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 7000, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 12400, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 13525, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
           }
         ]
       },
@@ -216,6 +246,16 @@
               { "item": "Lens (IOL) Upgrade", "cost": 25000, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 3000, "note": "Mandatory testing package often overpriced." }
             ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 750000,
+            "avg_cost_govt": 650000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 9000, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 16000, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 25000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
           }
         ]
       }
@@ -262,6 +302,277 @@
             "hidden_costs": [
               { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
               { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 150000,
+            "avg_cost_govt": 55000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "country": "Argentina",
+    "currency_symbol": "$",
+    "states": [
+      {
+        "state_name": "Autonomous City of Buenos Aires",
+        "hospitals": [
+          {
+            "name": "Hospital Alemán",
+            "city": "Buenos Aires",
+            "type": "Private",
+            "rating": 4.8,
+            "hidden_charge_risk": "Medium"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 35000,
+            "avg_cost_govt": 13000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 14000,
+            "avg_cost_govt": 5500,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 2500,
+            "avg_cost_govt": 1500,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 250000,
+            "avg_cost_govt": 75000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Buenos Aires",
+        "hospitals": [
+          {
+            "name": "Hospital General de Agudos B. Rivadavia",
+            "city": "La Plata",
+            "type": "Government",
+            "rating": 4.8,
+            "hidden_charge_risk": "Low"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 15000,
+            "avg_cost_govt": 10000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 9900,
+            "avg_cost_govt": 8500,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 1500,
+            "avg_cost_govt": 990,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 150000,
+            "avg_cost_govt": 55000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Catamarca",
+        "hospitals": [
+          {
+            "name": "Hospital San Juan Bautista",
+            "city": "San Fernando del Valle de Catamarca",
+            "type": "Private",
+            "rating": 4.8,
+            "hidden_charge_risk": "Medium"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 55000,
+            "avg_cost_govt": 15000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 24000,
+            "avg_cost_govt": 7500,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 4500,
+            "avg_cost_govt": 2500,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 150000,
+            "avg_cost_govt": 55000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Chaco",
+        "hospitals": [
+          {
+            "name": "Hospital Julio C. Perrando",
+            "city": "Resistencia",
+            "type": "Government",
+            "rating": 4.3,
+            "hidden_charge_risk": "Medium"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 15000,
+            "avg_cost_govt": 10000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 14000,
+            "avg_cost_govt": 9500,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 2500,
+            "avg_cost_govt": 1500,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 140000,
+            "avg_cost_govt": 56000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
+            ]
+          }
+        ]
+      },
+      {
+        "state_name": "Chubut",
+        "hospitals": [
+          {
+            "name": "Hospital Regional de Comodoro Rivadavia",
+            "city": "Comodoro Rivadavia",
+            "type": "Government",
+            "rating": 4.8,
+            "hidden_charge_risk": "Medium"
+          }
+        ],
+        "procedures": [
+          {
+            "name": "Total Knee Replacement",
+            "avg_cost_private": 25000,
+            "avg_cost_govt": 19000,
+            "hidden_costs": [
+              { "item": "Anesthesiology Fee", "cost": 2500, "note": "Often billed out-of-network unexpectedly." },
+              { "item": "Operating Room Time", "cost": 5000, "note": "Billed per minute if surgery goes over schedule." }
+            ]
+          },
+          {
+                "name": "Angioplasty (1 Stent)",
+            "avg_cost_private": 16000,
+            "avg_cost_govt": 1100,
+            "hidden_costs": [
+              { "item": "Stent Upgrade Upsell", "cost": 6500, "note": "Pushing for 'imported' stents over capped-price ones." },
+              { "item": "Cath Lab Sterilization", "cost": 300, "note": "Often a separate unlisted charge." }
+            ]
+            },
+          {
+            "name": "Cataract Surgery",
+            "avg_cost_private": 4200,
+            "avg_cost_govt": 2600,
+            "hidden_costs": [
+              { "item": "Lens (IOL) Upgrade", "cost": 2500, "note": "Convincing patients standard lenses are inferior." },
+              { "item": "Pre-op Viral Markers", "cost": 300, "note": "Mandatory testing package often overpriced." }
+            ]
+          },
+          {
+            "name": "Heart Surgery",
+            "avg_cost_private": 120000,
+            "avg_cost_govt": 50000,
+            "hidden_costs": [
+                { "item": "Bed Charges", "cost": 600, "note": "Daily rent often excluded from surgery packages."},
+                { "item": "Consumables (Gloves/Masks)", "cost": 200, "note": "Often billed per-item at inflated rates."},
+                { "item": "Post-Op ICU Charges", "cost": 7000, "note": "ICU stay costs often not included in initial cost estimates."}
             ]
           }
         ]
