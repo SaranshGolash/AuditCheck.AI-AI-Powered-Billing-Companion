@@ -1,0 +1,102 @@
+<%- include('partials/header', { title: 'AuditCheck.AI - Transparency in Hidden Charges' }) %>
+
+<style>
+    .hero-text {
+        text-align: center;
+        margin-bottom: 3rem;
+        color: #1f2937;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: -webkit-linear-gradient(#1e3a8a, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        width: 100%;
+        margin: 3rem 0;
+    }
+
+    .cta-button-large {
+        background: linear-gradient(90deg, #2563eb, #1d4ed8);
+        color: white;
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .cta-button-large:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+    }
+</style>
+
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 1000px; margin-top: 4vh;">
+    
+    <div class="glass-card" style="text-align: center; padding: 4rem 2rem;">
+        <span style="background: rgba(37, 99, 235, 0.1); color: #1e40af; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem;">
+            🚀 MVP: Transparency First
+        </span>
+        
+        <h1 class="hero-title">Medical Bills,<br>Decoded.</h1>
+        
+        <p style="font-size: 1.25rem; color: #4b5563; max-width: 600px; margin: 0 auto 2.5rem auto;">
+            Hospitals often hide costs until it's too late. We help you find the <strong>fair price</strong> and spot hidden charges before you sign the papers.
+        </p>
+
+        <a href="/search" class="cta-button-large">
+            Check Fair Prices Now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i>
+        </a>
+    </div>
+
+    <div class="feature-grid">
+        <div class="glass-card" style="padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🔍</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">Reveal Hidden Costs</h3>
+            <p style="color: #4b5563;">
+                We flag common "surprise" items like consumables, physio charges, and bed rent exclusions.
+            </p>
+        </div>
+
+        <div class="glass-card" style="padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">⚖️</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">Compare & Choose</h3>
+            <p style="color: #4b5563;">
+                See the difference between Government (PM-JAY) rates and Private Hospital estimates instantly.
+            </p>
+        </div>
+
+        <div class="glass-card" style="padding: 2rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937;">Protect Your Savings</h3>
+            <p style="color: #4b5563;">
+                Avoid medical debt by understanding the full financial picture before treatment begins.
+            </p>
+        </div>
+    </div>
+
+    <div class="glass-card" style="width: 100%; padding: 2.5rem; background: rgba(255,255,255,0.4);">
+        <h3 style="color: #1f2937; margin-bottom: 1rem;">Why this matters?</h3>
+        <p style="font-style: italic; color: #374151; font-size: 1.1rem;">
+            "On 14 November, my father needed knee surgery. The quote was ₹1.65 Lakh. The final bill? Nearly ₹4 Lakh. HealthFlow exists so this doesn't happen to you."
+        </p>
+        <p style="margin-top: 1rem; font-weight: bold; color: #1e40af;">- Saransh G., Founder</p>
+    </div>
+
+</div>
+
+<%- include('partials/footer') %>
