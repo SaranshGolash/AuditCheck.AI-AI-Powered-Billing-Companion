@@ -70,6 +70,147 @@ body {
   );
 }
 
+/* SIDEBAR STYLES */
+
+/* Sidebar */
+.glass-sidebar {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    z-index: 1000; /* Top layer */
+    top: 0;
+    left: -300px; /* Hidden by default */
+    background: rgba(255, 255, 255, 0.65); /* High opacity glass */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+}
+
+/* When Active (Open) */
+.glass-sidebar.active {
+    left: 0;
+}
+
+/* Overlay (Darkens the background) */
+.sidebar-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 999; /* Just below sidebar */
+    backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* Header inside Sidebar */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #1e3a8a;
+    cursor: pointer;
+    padding: 0;
+    width: auto;
+    margin: 0;
+}
+
+/* Navigation Links */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav a i {
+    width: 25px;
+    color: #2563eb;
+}
+
+.sidebar-nav a:hover {
+    background: rgba(37, 99, 235, 0.1);
+    color: #1e40af;
+    transform: translateX(5px);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.user-profile:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background: #2563eb;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.user-info small {
+    color: #6b7280;
+}
+
 /* Form Elements Styling to match Glass Theme */
 h1, h2, h3 {
     color: #111827;
