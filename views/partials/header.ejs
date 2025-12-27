@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title !== 'undefined' ? title : 'AuditCheck.AI' %></title>
-    
     <link rel="stylesheet" href="/style.css">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -15,12 +16,11 @@
 </head>
 <body>
     
-    <%- include('sidebar') %>
+    <%- include('../partials/sidebar') %>
 
-    <nav class="glass-card" style="width: 100%; max-width: 1200px; padding: 1rem 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; border-radius: 0 0 20px 20px; border-top: none;">
-        
+    <nav class="glass-card nav-animate" style="width: 100%; max-width: 1200px; padding: 1rem 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; border-radius: 0 0 20px 20px; border-top: none;">
         <div style="display: flex; align-items: center; gap: 1rem;">
-            <button onclick="toggleSidebar()" style="background: none; border: none; font-size: 1.5rem; color: #1e3a8a; padding: 0; width: auto; cursor: pointer;">
+            <button onclick="toggleSidebar()" style="background: none; border: none; font-size: 1.5rem; color: #1e3a8a; cursor: pointer;">
                 <i class="fas fa-bars"></i>
             </button>
             <a href="/" style="text-decoration: none; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">
@@ -28,14 +28,31 @@
             </a>
         </div>
 
-        <div>
-            <a href="/search" style="text-decoration: none; font-weight: 600; color: #2563eb; margin-right: 15px;">Calculator</a>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <% if(typeof user != 'undefined' && user) { %>
+                <span class="text-blue-800 font-semibold hidden md:block">Hi, <%= user.username %></span>
+                <a href="/search" style="text-decoration: none; font-weight: 600; color: #2563eb;">Calculator</a>
+                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 transition">Logout</a>
+            <% } else { %>
+                <a href="/login" class="text-blue-600 font-semibold hover:underline">Login</a>
+                <a href="/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition">Sign Up</a>
+            <% } %>
         </div>
     </nav>
 
     <div class="main-wrapper" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        
+        <% if(success_msg != ''){ %>
+            <div class="glass-card bg-green-100 text-green-700 p-3 mb-4 text-center w-full max-w-md"><%= success_msg %></div>
+        <% } %>
+        <% if(error_msg != ''){ %>
+            <div class="glass-card bg-red-100 text-red-700 p-3 mb-4 text-center w-full max-w-md"><%= error_msg %></div>
+        <% } %>
 
     <script>
+        // GSAP Nav Animation
+        gsap.from(".nav-animate", { duration: 1, y: -50, opacity: 0, ease: "power2.out" });
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
