@@ -3,15 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= typeof title !== 'undefined' ? title : 'HealthFlow' %></title>
+    <title><%= typeof title !== 'undefined' ? title : 'AuditCheck.AI' %></title>
     
     <link rel="stylesheet" href="/style.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="main-wrapper">
+    
+    <%- include('sidebar') %>
+
+    <nav class="glass-card" style="width: 100%; max-width: 1200px; padding: 1rem 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; border-radius: 0 0 20px 20px; border-top: none;">
+        
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <button onclick="toggleSidebar()" style="background: none; border: none; font-size: 1.5rem; color: #1e3a8a; padding: 0; width: auto; cursor: pointer;">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="/" style="text-decoration: none; font-size: 1.5rem; font-weight: bold; color: #1e3a8a;">
+                AuditCheck.AI
+            </a>
+        </div>
+
+        <div>
+            <a href="/search" style="text-decoration: none; font-weight: 600; color: #2563eb; margin-right: 15px;">Calculator</a>
+        </div>
+    </nav>
+
+    <div class="main-wrapper" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
