@@ -38,3 +38,11 @@ VALUES
 ('City Ortho Care', 'Kolkata', TRUE, 4.2),
 ('Elite Private Hospital', 'Kolkata', FALSE, 4.5),
 ('Govt General Hospital', 'Kolkata', TRUE, 3.8);
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
