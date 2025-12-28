@@ -24,11 +24,11 @@ const pool = new Pool({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT || 5432,
-    ssl: isProduction ? { rejectUnauthorized: false } : false
+    connectionString: process.env.DATABASE_URL,
+    ssl:{ rejectUnauthorized: false }
 });
 
-const rawData = fs.readFileSync(path.join(__dirname, 'data', 'healthcare_pricing.json'));
-const healthcareData = JSON.parse(rawData);
+const healthcareData = require('./healthcare_data.json');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
