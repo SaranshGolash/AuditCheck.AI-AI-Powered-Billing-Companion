@@ -16,7 +16,7 @@ const port = 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const isProduction = process.env.NODE_ENV === 'production';
-const healthcareData = require('./data/healthcare_data.json');
+const healthcareData = require('./data/healthcare_pricing.json');
 
 // Database Connection
 const pool = new Pool({
