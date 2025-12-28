@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: 'Login - AuditCheck.AI' }) %>
+
+<div class="glass-card gsap-fade-up" style="max-width: 400px; text-align: center;">
+    <h2 class="text-2xl font-bold text-blue-900 mb-6">Welcome Back</h2>
+    <form action="/login" method="POST">
+        <div class="mb-4 text-left">
+            <label>Email Address</label>
+            <input type="email" name="email" required placeholder="Enter your email">
+        </div>
+        <div class="mb-6 text-left">
+            <label>Password</label>
+            <input type="password" name="password" required placeholder="Enter your password">
+        </div>
+        <button type="submit" class="w-full">Login</button>
+    </form>
+    <p class="mt-4 text-gray-600">New here? <a href="/register" class="text-blue-600 font-bold">Create an account</a></p>
+</div>
+
+<script>
+    gsap.from(".gsap-fade-up", { duration: 1, y: 30, opacity: 0, ease: "power2.out" });
+</script>
+
+<%- include('partials/footer') %>
