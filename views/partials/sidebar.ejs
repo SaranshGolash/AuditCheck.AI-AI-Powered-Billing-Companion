@@ -1,6 +1,6 @@
 <div id="sidebar" class="glass-sidebar">
     <div class="sidebar-header">
-        <h3 style="color: #1e3a8a; margin: 0;">HealthFlow</h3>
+        <h3>AuditCheck.AI</h3>
         <button onclick="toggleSidebar()" class="close-btn">&times;</button>
     </div>
 
@@ -33,15 +33,26 @@
     </ul>
 
     <div class="sidebar-footer">
-        <div class="user-profile">
-            <div class="avatar-circle">
-                <i class="fas fa-user"></i>
+        <% if(typeof user !== 'undefined' && user) { %>
+            <div class="user-profile">
+                <div class="avatar-circle">
+                    <%= user.username.charAt(0).toUpperCase() %>
+                </div>
+                <div class="user-info">
+                    <span><%= user.username %></span>
+                    <a href="/logout" style="font-size: 0.8rem; color: #ef4444; padding:0; background:none;">Logout</a>
+                </div>
             </div>
-            <div class="user-info">
-                <span>Guest User</span>
-                <small>Login / Sign Up</small>
+        <% } else { %>
+            <div class="user-profile" onclick="window.location.href='/login'">
+                <div class="avatar-circle">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span>Login / Sign Up</span>
+                </div>
             </div>
-        </div>
+        <% } %>
     </div>
 </div>
 

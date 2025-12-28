@@ -18,14 +18,14 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Database Connection
 const pool = new Pool({
-    user: process.env.DB_USER || 'postgres',
-    host: process.env.DB_HOST || 'localhost',
-    database: process.env.DB_NAME || 'healthflow',
-    password: process.env.DB_PASS || 'password',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT || 5432,
 });
 
-const rawData = fs.readFileSync(path.join(__dirname, 'data', 'healthcare_data.json'));
+const rawData = fs.readFileSync(path.join(__dirname, 'data', 'healthcare_pricing.json'));
 const healthcareData = JSON.parse(rawData);
 
 app.set('view engine', 'ejs');
@@ -122,11 +122,11 @@ function ensureAuthenticated(req, res, next) {
 // App Routes
 
 app.get('/', (req, res) => {
-    res.render('landing'); // Renders landing.ejs
+    res.render('landing');
 });
 
 app.get('/search', ensureAuthenticated, (req, res) => {
-    res.render('get-response'); // Renders get-response.ejs
+    res.render('get-response');
 });
 
 // Logic Route: Calculate Pathway
@@ -205,5 +205,5 @@ app.get('/api/states/:country', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`HealthFlow running on port ${port}`);
+    console.log(`AuditCheck.AI running on port ${port}`);
 });

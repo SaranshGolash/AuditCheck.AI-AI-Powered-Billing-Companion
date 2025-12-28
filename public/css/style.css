@@ -70,78 +70,74 @@ body {
   );
 }
 
-/* SIDEBAR STYLES */
+/* Sidebar Styles */
 
-/* Sidebar */
+/* --- GLASS SIDEBAR CONTAINER --- */
 .glass-sidebar {
-    height: 100%;
+    height: 100vh;
     width: 280px;
     position: fixed;
-    z-index: 1000; /* Top layer */
     top: 0;
-    left: -300px; /* Hidden by default */
-    background: rgba(255, 255, 255, 0.65); /* High opacity glass */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
-    transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    left: -320px; /* Fully hidden by default */
+    z-index: 5000; /* Ensure it floats above everything */
+    
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-right: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+    
+    /* Layout & Animation */
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth 'ease-out' slide */
 }
 
-/* When Active (Open) */
+/* Active State (Shown) */
 .glass-sidebar.active {
     left: 0;
 }
 
-/* Overlay (Darkens the background) */
-.sidebar-overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.3);
-    z-index: 999; /* Just below sidebar */
-    backdrop-filter: blur(2px);
-}
-
-.sidebar-overlay.active {
-    display: block;
-}
-
-/* Header inside Sidebar */
+/* --- SIDEBAR HEADER --- */
 .sidebar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(31, 41, 55, 0.1);
+}
+
+.sidebar-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .close-btn {
     background: none;
     border: none;
     font-size: 2rem;
-    color: #1e3a8a;
+    color: #6b7280;
     cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
     padding: 0;
-    width: auto;
-    margin: 0;
+    line-height: 1;
 }
 
-/* Navigation Links */
+.close-btn:hover {
+    color: #ef4444; /* Red on hover */
+    transform: rotate(90deg);
+}
+
+/* --- NAVIGATION LINKS --- */
 .sidebar-nav {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex-grow: 1;
+    flex-grow: 1; /* Pushes footer to bottom */
 }
 
 .sidebar-nav li {
@@ -151,64 +147,105 @@ body {
 .sidebar-nav a {
     display: flex;
     align-items: center;
-    padding: 0.8rem 1rem;
+    padding: 0.9rem 1rem;
     color: #374151;
     text-decoration: none;
     font-weight: 500;
     border-radius: 12px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .sidebar-nav a i {
-    width: 25px;
-    color: #2563eb;
+    width: 35px; /* Fixed width for icon alignment */
+    font-size: 1.2rem;
+    color: #2563eb; /* Primary Blue */
+    transition: transform 0.2s ease;
 }
 
+/* Hover Effects */
 .sidebar-nav a:hover {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(37, 99, 235, 0.1); /* Light Blue Tint */
     color: #1e40af;
     transform: translateX(5px);
 }
 
-/* Sidebar Footer */
+.sidebar-nav a:hover i {
+    transform: scale(1.1);
+}
+
+/* --- SIDEBAR FOOTER & USER PROFILE --- */
 .sidebar-footer {
     margin-top: auto;
-    border-top: 1px solid rgba(0,0,0,0.1);
     padding-top: 1rem;
+    border-top: 1px solid rgba(31, 41, 55, 0.1);
 }
 
 .user-profile {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
+    padding: 0.75rem;
+    border-radius: 16px;
     cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 10px;
+    transition: background 0.3s ease;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .user-profile:hover {
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .avatar-circle {
-    width: 40px;
-    height: 40px;
-    background: #2563eb;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
 }
 
 .user-info {
     display: flex;
     flex-direction: column;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1f2937;
 }
 
-.user-info small {
-    color: #6b7280;
+/* Make spans look clickable since they are Login/Sign Up */
+.user-info span {
+    transition: color 0.2s;
+}
+
+.user-info span:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* --- OVERLAY (Dark Background) --- */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Dimmed background */
+    backdrop-filter: blur(4px); /* Blur the content behind */
+    z-index: 4999; /* Just behind the sidebar */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Form Elements Styling to match Glass Theme */
