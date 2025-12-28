@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 // 2. Load the JSON Data
-const rawData = fs.readFileSync(path.join(__dirname, 'healthcare_data.json'));
+const rawData = fs.readFileSync(path.join(__dirname, 'data', 'healthcare_pricing.json'));
 const countriesData = JSON.parse(rawData);
 
 async function seedDatabase() {
