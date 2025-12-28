@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
@@ -10,25 +9,51 @@ const flash = require('connect-flash');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// AI Configuration
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+// 1. Define Environment Variables (Fixes 'isProduction' error)
 const isProduction = process.env.NODE_ENV === 'production';
-const healthcareData = require('./data/healthcare_pricing.json');
 
-// Database Connection
+// 2. Safe Database Connection
+// Use Neon URL in production, local config otherwise
 const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 5432,
-    connectionString: process.env.DATABASE_URL,
-    ssl:{ rejectUnauthorized: false }
+    connectionString: isProduction ? process.env.DATABASE_URL : undefined,
+    user: isProduction ? undefined : (process.env.DB_USER || 'postgres'),
+    host: isProduction ? undefined : (process.env.DB_HOST || 'localhost'),
+    database: isProduction ? undefined : (process.env.DB_NAME || 'healthflow'),
+    password: isProduction ? undefined : (process.env.DB_PASS || 'password'),
+    port: 5432,
+    ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
+// 3. Safe JSON Loading (Fixes 'Cannot find module' crash)
+let healthcareData = [];
+try {
+    // Try root path first (Vercel standard)
+    healthcareData = require('./healthcare_data.json');
+    console.log("SUCCESS: Loaded data from root.");
+} catch (e1) {
+    try {
+        // Try data folder as fallback
+        healthcareData = require('./data/healthcare_data.json');
+        console.log("SUCCESS: Loaded data from data folder.");
+    } catch (e2) {
+        console.error("CRITICAL: Could not find healthcare_data.json in root or data folder.");
+        // App will start but search won't work. Check Vercel logs to see this message.
+    }
+}
+
+// 4. AI Configuration (Safe check)
+let model;
+if (process.env.GEMINI_API_KEY) {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    model = genAI.getGenerativeModel({ model: "gemini-pro" });
+} else {
+    console.warn("WARNING: GEMINI_API_KEY is missing.");
+}
+
+// View Engine Setup (Use absolute path)
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
