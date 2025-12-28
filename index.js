@@ -30,15 +30,15 @@ const pool = new Pool({
 let healthcareData = [];
 try {
     // Try root path first (Vercel standard)
-    healthcareData = require('./healthcare_data.json');
+    healthcareData = require('./healthcare_pricing.json');
     console.log("SUCCESS: Loaded data from root.");
 } catch (e1) {
     try {
         // Try data folder as fallback
-        healthcareData = require('./data/healthcare_data.json');
+        healthcareData = require('./data/healthcare_pricing.json');
         console.log("SUCCESS: Loaded data from data folder.");
     } catch (e2) {
-        console.error("CRITICAL: Could not find healthcare_data.json in root or data folder.");
+        console.error("CRITICAL: Could not find healthcare_pricing.json in root or data folder.");
         // App will start but search won't work. Check Vercel logs to see this message.
     }
 }
