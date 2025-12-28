@@ -1,27 +1,88 @@
 <%- include('partials/header', { title: 'Sign Up - AuditCheck.AI' }) %>
 
-<div class="glass-card gsap-fade-up" style="max-width: 400px; text-align: center;">
-    <h2 class="text-2xl font-bold text-blue-900 mb-6">Create Account</h2>
-    <form action="/register" method="POST">
-        <div class="mb-4 text-left">
-            <label>Username</label>
-            <input type="text" name="username" required placeholder="Choose a username">
+<div class="glass-card gsap-container w-full max-w-md p-8 sm:p-10 relative overflow-hidden" style="margin-top: 2rem;">
+    
+    <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob"></div>
+    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-2000"></div>
+
+    <div class="text-center mb-8 form-item">
+        <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600 mb-2">
+            Create Account
+        </h2>
+        <p class="text-gray-500 text-sm">Join AuditCheck.AI to uncover hidden costs.</p>
+    </div>
+
+    <form action="/register" method="POST" class="space-y-5">
+        
+        <div class="form-item relative">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Username</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-user text-gray-400"></i>
+                </div>
+                <input type="text" name="username" required 
+                    class="pl-10 w-full bg-white/50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none py-3" 
+                    placeholder="johndoe123">
+            </div>
         </div>
-        <div class="mb-4 text-left">
-            <label>Email Address</label>
-            <input type="email" name="email" required placeholder="Enter your email">
+
+        <div class="form-item relative">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Email Address</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                </div>
+                <input type="email" name="email" required 
+                    class="pl-10 w-full bg-white/50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none py-3" 
+                    placeholder="john@example.com">
+            </div>
         </div>
-        <div class="mb-6 text-left">
-            <label>Password</label>
-            <input type="password" name="password" required placeholder="Create a password">
+
+        <div class="form-item relative">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Password</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-lock text-gray-400"></i>
+                </div>
+                <input type="password" name="password" required 
+                    class="pl-10 w-full bg-white/50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none py-3" 
+                    placeholder="••••••••">
+            </div>
         </div>
-        <button type="submit" class="w-full">Sign Up</button>
+
+        <button type="submit" 
+            class="form-button">
+            Sign Up <i class="fas fa-arrow-right ml-2 text-sm"></i>
+        </button>
+
     </form>
-    <p class="mt-4 text-gray-600">Already have an account? <a href="/login" class="text-blue-600 font-bold">Login</a></p>
+
+    <div class="form-item mt-6 text-center border-t border-gray-200/50 pt-4">
+        <p class="text-gray-600 text-sm">
+            Already have an account? 
+            <a href="/login" class="text-blue-600 font-bold hover:text-blue-800 transition-colors">Log In</a>
+        </p>
+    </div>
 </div>
 
 <script>
-    gsap.from(".gsap-fade-up", { duration: 1, y: 30, opacity: 0, ease: "power2.out" });
+    // Staggered Animation for a premium feel
+    // Elements slide up one by one instead of the whole block appearing at once
+    gsap.from(".glass-card", { 
+        duration: 1, 
+        y: 50, 
+        opacity: 0, 
+        ease: "power3.out" 
+    });
+    
+    gsap.from(".form-item", { 
+        duration: 0.8, 
+        y: 20, 
+        opacity: 0, 
+        stagger: 0.1, // 0.1s delay between each item
+        delay: 0.3,   // Wait for card to appear first
+        ease: "back.out(1.7)" // Slight bounce effect
+    });
 </script>
 
 <%- include('partials/footer') %>

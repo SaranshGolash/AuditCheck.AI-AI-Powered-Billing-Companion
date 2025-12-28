@@ -4,14 +4,14 @@
     <h2 class="text-2xl font-bold text-blue-900 mb-6">Welcome Back</h2>
     <form action="/login" method="POST">
         <div class="mb-4 text-left">
-            <label>Email Address</label>
-            <input type="email" name="email" required placeholder="Enter your email">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Email Address</label>
+            <input class="pl-10 w-full bg-white/50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none py-3" type="email" name="email" required placeholder="Enter your email">
         </div>
         <div class="mb-6 text-left">
-            <label>Password</label>
-            <input type="password" name="password" required placeholder="Enter your password">
+            <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Password</label>
+            <input class="pl-10 w-full bg-white/50 border border-gray-200 text-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 outline-none py-3" type="password" name="password" required placeholder="Enter your password">
         </div>
-        <button type="submit" class="w-full">Login</button>
+        <button type="submit" class="form-button">Login</button>
     </form>
     <p class="mt-4 text-gray-600">New here? <a href="/register" class="text-blue-600 font-bold">Create an account</a></p>
 </div>
