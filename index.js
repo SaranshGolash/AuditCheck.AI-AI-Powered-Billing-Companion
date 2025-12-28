@@ -16,6 +16,7 @@ const port = 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
+
 // Database Connection
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -166,28 +167,22 @@ app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
     }
 });
 
-// AI-Powered Question Answering Endpoint
 app.post('/api/ask-ai', ensureAuthenticated, async (req, res) => {
-    const { question, contextData } = req.body;
-    
     try {
-        const prompt = `
-            You are an expert medical bill auditor named AuditCheck AI. 
-            User Context: ${JSON.stringify(contextData)}
-            User Question: ${question}
-            
-            Provide a short, punchy, and financial-focused advice. 
-            Warn them about specific hidden charges if applicable.
-        `;
-
+        const { question, contextData } = req.body;
+        const prompt = `You are AuditCheck AI, expert medical bill auditor. 
+Context: ${JSON.stringify(contextData)}
+Question: ${question}
+Respond in 1-2 sentences with financial advice only.`;
+        
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        const text = response.text();
-        
-        res.json({ answer: text });
+        res.json({ answer: response.text().replace(/\n/g, ' ') });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ answer: "I'm having trouble connecting to the audit servers right now." });
+        console.error('AI Error:', error);
+        res.status(500).json({ 
+            answer: "Tip: Verify disposable charges (syringes, gloves) against procedure norms—they're often overpriced." 
+        });
     }
 });
 
