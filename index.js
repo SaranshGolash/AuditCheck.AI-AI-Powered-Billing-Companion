@@ -157,39 +157,58 @@ app.get('/search', ensureAuthenticated, (req, res) => {
 });
 
 // Logic Route: Calculate Pathway
+// Logic Route: Calculate Pathway
 app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
-    const { procedure, income_level } = req.body;
+    // 1. Capture 'state' and 'country' from the form body
+    const { procedure, income_level, state, country } = req.body;
+
     try {
+        // 2. Fetch Procedure Details (Optimized for State specificity if needed)
+        // Note: Currently, procedures are stored generally, but we can filter if your schema supports it.
+        // For MVP, we fetch the procedure by name.
         const procQuery = await pool.query('SELECT * FROM procedures WHERE name ILIKE $1', [`%${procedure}%`]);
         
-        // Handle "Procedure not found" gracefully
-        let procData = procQuery.rows[0];
-        let hiddenCosts = [];
+        if (procQuery.rows.length === 0) {
+            // Fallback: If procedure not found, render error or use dummy data
+             return res.render('error', { 
+                 message: `We couldn't find data for "${procedure}" yet. Try "Total Knee Replacement".`,
+                 user: req.session.user 
+             });
+        }
         
-        if (!procData) {
-             // Fallback dummy data if DB is empty for MVP demo
-             procData = { name: procedure, avg_private_cost: 0, pmjay_rate: 0, recovery_days: 0 };
-        } else {
-             const hiddenQuery = await pool.query('SELECT * FROM hidden_costs WHERE procedure_id = $1', [procData.id]);
-             hiddenCosts = hiddenQuery.rows;
-        }
+        const procData = procQuery.rows[0];
 
-        let hospitalQueryText = 'SELECT * FROM hospitals';
+        // 3. Fetch Hidden Costs associated with this procedure
+        const hiddenQuery = await pool.query('SELECT * FROM hidden_costs WHERE procedure_id = $1', [procData.id]);
+        
+        // 4. Fetch Recommended Hospitals FILTERED BY STATE
+        // We use the ILIKE operator for flexible matching on the location string (e.g., "Kolkata, West Bengal")
+        let hospitalQueryText = 'SELECT * FROM hospitals WHERE location ILIKE $1';
+        const queryParams = [`%${state}%`];
+
+        // Add Logic: If low income, only show PMJAY empaneled hospitals
         if (income_level === 'low' || income_level === 'middle') {
-            hospitalQueryText += ' WHERE is_pmjay_empaneled = TRUE';
+            hospitalQueryText += ' AND is_pmjay_empaneled = TRUE';
         }
-        const hospQuery = await pool.query(hospitalQueryText);
+        
+        // Order by rating for better UX
+        hospitalQueryText += ' ORDER BY rating DESC';
 
+        const hospQuery = await pool.query(hospitalQueryText, queryParams);
+
+        // 5. Render the Pathway View
         res.render('pathway', {
             procedure: procData,
-            hidden_costs: hiddenCosts,
+            hidden_costs: hiddenQuery.rows,
             hospitals: hospQuery.rows,
-            income_level: income_level
+            income_level: income_level,
+            user: req.session.user, // Pass user for header/sidebar
+            selected_state: state     // Pass state to display in view if needed
         });
 
     } catch (err) {
         console.error(err);
-        res.send("Server Error");
+        res.status(500).send("Server Error: Unable to calculate pathway.");
     }
 });
 

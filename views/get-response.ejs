@@ -1,62 +1,145 @@
-<%- include('partials/header') %>
-<body class="bg-blue-50 h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 class="text-3xl font-bold text-blue-700 mb-2">HealthFlow</h1>
-        <p class="text-gray-600 mb-6">Know the cost before you step in.</p>
+<%- include('partials/header', { title: 'Calculate Cost - AuditCheck.AI' }) %>
+
+<div class="w-full min-h-[80vh] flex items-center justify-center p-4">
+    
+    <div class="glass-card gsap-fade-up w-full max-w-lg p-8 relative" style="margin-top: 0;">
         
-        <form action="/check-pathway" method="POST" class="space-y-4">
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Procedure Needed</label>
-                <select name="procedure" class="w-full border p-2 rounded">
-                    <option value="Knee Replacement">Knee Replacement</option>
-                    <option value="Cataract Surgery">Cataract Surgery</option>
-                </select>
-            </div>
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600 mb-2">
+                Estimate Your Cost
+            </h1>
+            <p class="text-gray-600 text-sm">Select your location and procedure to find fair prices.</p>
+        </div>
+
+        <form action="/check-pathway" method="POST" class="space-y-5">
             
-            <div>
-                <label class="block text-gray-700 font-bold mb-2">Household Income Level</label>
-                <select name="income_level" class="w-full border p-2 rounded">
-                    <option value="low">Low (Below ₹5L/year)</option>
-                    <option value="middle">Middle (₹5L - ₹10L/year)</option>
-                    <option value="high">High (Above ₹10L/year)</option>
-                </select>
+            <div class="form-item">
+                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Medical Procedure</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-procedures text-blue-500"></i>
+                    </div>
+                    <select name="procedure" class="pl-10 w-full bg-white/60 border border-gray-200 text-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none py-3 appearance-none">
+                        <option value="Total Knee Replacement">Total Knee Replacement</option>
+                        <option value="Angioplasty (1 Stent)">Angioplasty (1 Stent)</option>
+                        <option value="Cataract Surgery">Cataract Surgery</option>
+                        <option value="Heart Surgery">Heart Surgery</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                    </div>
+                </div>
             </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded font-bold hover:bg-blue-700">
-                Generate Care Pathway
+            <div class="form-item">
+                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Country</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-globe-americas text-blue-500"></i>
+                    </div>
+                    <select id="countrySelect" name="country" class="pl-10 w-full bg-white/60 border border-gray-200 text-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none py-3 appearance-none" required>
+                        <option value="">Select Country</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">State / Region</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-map-marker-alt text-blue-500"></i>
+                    </div>
+                    <select id="stateSelect" name="state" class="pl-10 w-full bg-white/60 border border-gray-200 text-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none py-3 appearance-none" required>
+                        <option value="">Select Country First</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wide mb-1 ml-1">Household Income</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-wallet text-blue-500"></i>
+                    </div>
+                    <select name="income_level" class="pl-10 w-full bg-white/60 border border-gray-200 text-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none py-3 appearance-none">
+                        <option value="middle">Middle Income</option>
+                        <option value="low">Low Income (Subsidized)</option>
+                        <option value="high">High Income</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="form-item w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1 transition-all duration-300 mt-4">
+                Generate Pathway <i class="fas fa-arrow-right ml-2"></i>
             </button>
         </form>
     </div>
+</div>
 
 <script>
-    // Fetch Countries on Load
+    // GSAP Animation
+    if (typeof gsap !== 'undefined') {
+        gsap.from(".gsap-fade-up", { duration: 1, y: 50, opacity: 0, ease: "power3.out" });
+        gsap.from(".form-item", { duration: 0.8, y: 20, opacity: 0, stagger: 0.1, delay: 0.3, ease: "back.out(1.7)" });
+    }
+
+    // --- Dynamic Dropdown Logic ---
+    
+    // 1. Fetch Countries on Load
     fetch('/api/countries')
         .then(res => res.json())
         .then(data => {
+            // Remove duplicates using Set
+            const uniqueCountries = [...new Set(data)];
             const select = document.getElementById('countrySelect');
-            data.forEach(country => {
+            
+            uniqueCountries.forEach(country => {
                 const option = document.createElement('option');
                 option.value = country;
                 option.text = country;
                 select.appendChild(option);
             });
-        });
+        })
+        .catch(err => console.error("Error loading countries:", err));
 
-    // Fetch States when Country changes
+    // 2. Fetch States when Country changes
     document.getElementById('countrySelect').addEventListener('change', function() {
         const country = this.value;
+        const stateSelect = document.getElementById('stateSelect');
+        
+        // Reset State Dropdown
+        stateSelect.innerHTML = '<option value="">Loading...</option>';
+
+        if (!country) {
+            stateSelect.innerHTML = '<option value="">Select Country First</option>';
+            return;
+        }
+
         fetch(`/api/states/${country}`)
             .then(res => res.json())
             .then(data => {
-                const stateSelect = document.getElementById('stateSelect');
-                stateSelect.innerHTML = '<option value="">Select State</option>'; // Reset
+                stateSelect.innerHTML = '<option value="">Select State</option>';
                 data.forEach(state => {
                     const option = document.createElement('option');
                     option.value = state;
                     option.text = state;
                     stateSelect.appendChild(option);
                 });
+            })
+            .catch(err => {
+                console.error("Error loading states:", err);
+                stateSelect.innerHTML = '<option value="">Error loading states</option>';
             });
     });
 </script>
+
 <%- include('partials/footer') %>
