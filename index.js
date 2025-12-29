@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const OpenAI = require('openai');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -39,21 +39,16 @@ try {
 }
 
 //AI Configuration
-let model;
-if (process.env.GEMINI_API_KEY) {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash-latest",
-        safetySettings: [
-            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
-        ]
+
+let aiClient;
+if (process.env.GROQ_API_KEY) {
+    aiClient = new OpenAI({
+        apiKey: process.env.GROQ_API_KEY,
+        baseURL: "https://api.groq.com/openai/v1"
     });
-    console.log("SUCCESS: AI Model Initialized (Gemini 1.5 Flash).");
+    console.log("SUCCESS: Connected to Groq AI.");
 } else {
-    console.warn("WARNING: GEMINI_API_KEY is missing.");
+    console.warn("WARNING: GROQ_API_KEY is missing in .env");
 }
 
 // View Engine Setup
@@ -215,18 +210,36 @@ app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
 app.post('/api/ask-ai', ensureAuthenticated, async (req, res) => {
     try {
         const { question, contextData } = req.body;
-        const prompt = `You are AuditCheck AI, expert medical bill auditor. 
-Context: ${JSON.stringify(contextData)}
-Question: ${question}
-Respond in 1-2 sentences with financial advice only.`;
+
+        if (!aiClient) {
+            return res.status(503).json({ answer: "AI service not configured." });
+        }
+
+        // Groq is FAST. We use 'llama3-8b-8192' which is free and smart.
+        const completion = await aiClient.chat.completions.create({
+            messages: [
+                {
+                    role: "system",
+                    content: "You are AuditCheck AI, a medical bill auditor. Provide short, helpful financial advice based on the context."
+                },
+                {
+                    role: "user",
+                    content: `Context: ${JSON.stringify(contextData || {})}\n\nQuestion: ${question}`
+                }
+            ],
+            model: "llama3-8b-8192", 
+            temperature: 0.5,
+        });
+
+        const answer = completion.choices[0]?.message?.content || "I couldn't generate an answer.";
         
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        res.json({ answer: response.text().replace(/\n/g, ' ') });
+        // Send the clean answer back to frontend
+        res.json({ answer: answer });
+
     } catch (error) {
-        console.error('AI Error:', error);
+        console.error("Groq AI Error:", error);
         res.status(500).json({ 
-            answer: "Tip: Verify disposable charges (syringes, gloves) against procedure norms—they're often overpriced." 
+            answer: "We are having trouble connecting to the AI right now. Please try again later." 
         });
     }
 });
