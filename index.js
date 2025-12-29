@@ -43,7 +43,7 @@ let model;
 if (process.env.GEMINI_API_KEY) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     model = genAI.getGenerativeModel({ 
-        model: "gemini-1.5-flash",
+        model: "gemini-1.5-flash-latest",
         safetySettings: [
             { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
             { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
