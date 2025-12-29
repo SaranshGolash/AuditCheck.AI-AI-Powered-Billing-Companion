@@ -215,7 +215,6 @@ app.post('/api/ask-ai', ensureAuthenticated, async (req, res) => {
             return res.status(503).json({ answer: "AI service not configured." });
         }
 
-        // Groq is FAST. We use 'llama3-8b-8192' which is free and smart.
         const completion = await aiClient.chat.completions.create({
             messages: [
                 {
@@ -227,13 +226,12 @@ app.post('/api/ask-ai', ensureAuthenticated, async (req, res) => {
                     content: `Context: ${JSON.stringify(contextData || {})}\n\nQuestion: ${question}`
                 }
             ],
-            model: "llama3-8b-8192", 
+            model: "llama3-8b-8192", // Free, fast, and reliable
             temperature: 0.5,
         });
 
         const answer = completion.choices[0]?.message?.content || "I couldn't generate an answer.";
         
-        // Send the clean answer back to frontend
         res.json({ answer: answer });
 
     } catch (error) {

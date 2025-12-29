@@ -67,7 +67,7 @@
 </div>
 
 <script>
-    // GSAP Animations
+    // GSAP Animations (Keep this as is)
     if (typeof gsap !== 'undefined') {
         gsap.from(".gsap-left", { duration: 1, x: -50, opacity: 0, ease: "power2.out" });
         gsap.from(".gsap-right", { duration: 1, x: 50, opacity: 0, delay: 0.2, ease: "power2.out" });
@@ -76,7 +76,6 @@
 
     // AI Logic
     async function askAI(event) {
-        // Prevent form from reloading the page
         event.preventDefault();
 
         const input = document.getElementById('ai-input');
@@ -94,7 +93,7 @@
                 </span>
             </div>`;
         
-        // Clear input and scroll down
+        // Scroll down
         input.value = '';
         history.scrollTop = history.scrollHeight;
 
@@ -103,13 +102,17 @@
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
         btn.disabled = true;
 
-        // 3. Prepare Context for Backend
+        // --- UPDATED SECTION START ---
+        // 3. Prepare Context (Now includes Location & Income for better advice)
         const contextData = {
-            procedure: "<%= procedure.name %>",
-            price_private: "<%= procedure.avg_private_cost %>",
-            price_fair: "<%= procedure.pmjay_rate %>",
+            procedure_name: "<%= procedure.name %>",
+            estimated_cost: "<%= procedure.avg_private_cost || 'N/A' %>",
+            fair_market_rate: "<%= procedure.pmjay_rate || 'N/A' %>",
+            user_income_level: "<%= income_level %>", // e.g., 'middle', 'low'
+            user_location: "<%= selected_state %>",   // e.g., 'Maharashtra'
             hidden_costs: <%- JSON.stringify(hidden_costs) %>
         };
+        // --- UPDATED SECTION END ---
 
         try {
             // 4. Hit the API Endpoint
@@ -123,10 +126,10 @@
             // 5. Add AI Response to Chat
             history.innerHTML += `
                 <div class="text-left mb-2">
-                    <span class="bg-white text-gray-800 border border-gray-200 px-3 py-2 rounded-lg rounded-tl-none inline-block text-sm shadow-sm">
-                        <strong class="text-blue-600 block mb-1 text-xs">AuditAI</strong>
+                    <div class="bg-white text-gray-800 border border-gray-200 px-3 py-2 rounded-lg rounded-tl-none inline-block text-sm shadow-sm">
+                        <strong class="text-blue-600 block mb-1 text-xs uppercase tracking-wide">AuditAI Analysis</strong>
                         ${data.answer}
-                    </span>
+                    </div>
                 </div>`;
             
             history.scrollTop = history.scrollHeight;
@@ -138,7 +141,6 @@
             // 6. Restore Button State
             btn.innerHTML = originalIcon;
             btn.disabled = false;
-            // Refocus input for next question
             input.focus(); 
         }
     }
