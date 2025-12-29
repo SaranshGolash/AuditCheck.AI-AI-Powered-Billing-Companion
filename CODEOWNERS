@@ -1,0 +1,18 @@
+# This file forces GitHub to request YOUR review if these files are touched.
+# Replace @your-github-username with your actual handle.
+
+# 1. CRITICAL: Lock down the Backend (The "Red Zone")
+index.js                @SaranshGolash
+package.json            @SaranshGolash
+seed.js                   @SaranshGolash
+.env                    @SaranshGolash
+CONTRIBUTING.md         @SaranshGolash
+Contributing-Rules.md         @SaranshGolash
+queries.sql              @SaranshGolash
+
+# 2. ALLOWED: Data & Frontend (The "Green Zone")
+# We leave these blank so anyone can contribute, 
+# BUT you still have final say via Branch Protection.
+data/healthcare_pricing.json
+views/
+public/
