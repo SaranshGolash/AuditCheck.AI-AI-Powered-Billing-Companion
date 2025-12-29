@@ -226,7 +226,7 @@ app.post('/api/ask-ai', ensureAuthenticated, async (req, res) => {
                     content: `Context: ${JSON.stringify(contextData || {})}\n\nQuestion: ${question}`
                 }
             ],
-            model: "llama3-8b-8192", // Free, fast, and reliable
+            model: "llama-3.3-70b-versatile",
             temperature: 0.5,
         });
 
