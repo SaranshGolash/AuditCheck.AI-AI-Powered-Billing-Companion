@@ -11,11 +11,9 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// 1. Define Environment Variables (Fixes 'isProduction' error)
 const isProduction = process.env.NODE_ENV === 'production';
 
-// 2. Safe Database Connection
-// Use Neon URL in production, local config otherwise
+// Database Connection
 const pool = new Pool({
     connectionString: isProduction ? process.env.DATABASE_URL : undefined,
     user: isProduction ? undefined : (process.env.DB_USER || 'postgres'),
@@ -26,33 +24,39 @@ const pool = new Pool({
     ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
-// 3. Safe JSON Loading (Fixes 'Cannot find module' crash)
+// Safe JSON Loading
 let healthcareData = [];
 try {
-    // Try root path first (Vercel standard)
     healthcareData = require('./healthcare_pricing.json');
     console.log("SUCCESS: Loaded data from root.");
 } catch (e1) {
     try {
-        // Try data folder as fallback
         healthcareData = require('./data/healthcare_pricing.json');
         console.log("SUCCESS: Loaded data from data folder.");
     } catch (e2) {
         console.error("CRITICAL: Could not find healthcare_pricing.json in root or data folder.");
-        // App will start but search won't work. Check Vercel logs to see this message.
     }
 }
 
-// 4. AI Configuration (Safe check)
+//AI Configuration
 let model;
 if (process.env.GEMINI_API_KEY) {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    model = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash",
+        safetySettings: [
+            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" },
+        ]
+    });
+    console.log("SUCCESS: AI Model Initialized (Gemini 1.5 Flash).");
 } else {
     console.warn("WARNING: GEMINI_API_KEY is missing.");
 }
 
-// View Engine Setup (Use absolute path)
+// View Engine Setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
@@ -157,19 +161,16 @@ app.get('/search', ensureAuthenticated, (req, res) => {
 });
 
 // Logic Route: Calculate Pathway
-// Logic Route: Calculate Pathway
+
 app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
-    // 1. Capture 'state' and 'country' from the form body
+    // Capture 'state' and 'country' from the form body
     const { procedure, income_level, state, country } = req.body;
 
     try {
-        // 2. Fetch Procedure Details (Optimized for State specificity if needed)
-        // Note: Currently, procedures are stored generally, but we can filter if your schema supports it.
-        // For MVP, we fetch the procedure by name.
+        // Fetch Procedure Details from DB
         const procQuery = await pool.query('SELECT * FROM procedures WHERE name ILIKE $1', [`%${procedure}%`]);
         
         if (procQuery.rows.length === 0) {
-            // Fallback: If procedure not found, render error or use dummy data
              return res.render('error', { 
                  message: `We couldn't find data for "${procedure}" yet. Try "Total Knee Replacement".`,
                  user: req.session.user 
@@ -178,15 +179,13 @@ app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
         
         const procData = procQuery.rows[0];
 
-        // 3. Fetch Hidden Costs associated with this procedure
+        // Fetch Hidden Costs associated with this procedure
         const hiddenQuery = await pool.query('SELECT * FROM hidden_costs WHERE procedure_id = $1', [procData.id]);
         
-        // 4. Fetch Recommended Hospitals FILTERED BY STATE
-        // We use the ILIKE operator for flexible matching on the location string (e.g., "Kolkata, West Bengal")
+        // Fetch Recommended Hospitals FILTERED BY STATE
         let hospitalQueryText = 'SELECT * FROM hospitals WHERE location ILIKE $1';
         const queryParams = [`%${state}%`];
 
-        // Add Logic: If low income, only show PMJAY empaneled hospitals
         if (income_level === 'low' || income_level === 'middle') {
             hospitalQueryText += ' AND is_pmjay_empaneled = TRUE';
         }
@@ -196,14 +195,15 @@ app.post('/check-pathway', ensureAuthenticated, async (req, res) => {
 
         const hospQuery = await pool.query(hospitalQueryText, queryParams);
 
-        // 5. Render the Pathway View
+        // Render the Pathway View
         res.render('pathway', {
             procedure: procData,
             hidden_costs: hiddenQuery.rows,
             hospitals: hospQuery.rows,
             income_level: income_level,
-            user: req.session.user, // Pass user for header/sidebar
-            selected_state: state     // Pass state to display in view if needed
+            user: req.session.user,
+            selected_state: state,
+            selected_country: country
         });
 
     } catch (err) {
