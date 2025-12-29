@@ -1,5 +1,4 @@
 # This file forces GitHub to request YOUR review if these files are touched.
-# Replace @your-github-username with your actual handle.
 
 # 1. CRITICAL: Lock down the Backend (The "Red Zone")
 index.js                @SaranshGolash
